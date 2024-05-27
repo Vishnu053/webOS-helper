@@ -4,16 +4,22 @@
   "description": "A small utility that can help you to easily setup, create and manage, and do more on WebOS TV platform",
   "main": "index.js",
   "scripts": {
-    "start": "node bin/webos-helper.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/bin/webos-helper.js",
+    "test": "node dist/test.js",
+    "build": "tsc"
   },
   "bin": {
     "webos-helper": "./bin/webos-helper.js"
-  },  
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "shelljs": "^0.8.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "@types/shelljs": "^0.8.15",
+    "typescript": "^5.4.5"
   }
 }

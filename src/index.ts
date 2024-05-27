@@ -1,21 +1,18 @@
-const shell = require('shelljs');
+import * as shell from 'shelljs';
 
-function checkNodeVersion() {
+function checkNodeVersion(): boolean {
   const nodeVersion = shell.exec('node -v', { silent: true }).stdout.trim();
   const versionNumber = nodeVersion.replace(/^v/, '');
   const [major, minor, patch] = versionNumber.split('.').map(Number);
-  if (major > 14 || (major === 14 && minor > 15) || (major === 14 && minor === 15 && patch >= 1)) {
-    return true;
-  }
-  return false;
+  return major > 14 || (major === 14 && minor > 15) || (major === 14 && minor === 15 && patch >= 1);
 }
 
-function checkNpmVersion() {
+function checkNpmVersion(): boolean {
   const npmVersion = shell.exec('npm -v', { silent: true }).stdout.trim();
   return npmVersion !== '';
 }
 
-function installWebosCli() {
+function installWebosCli(): void {
   if (!shell.which('node')) {
     shell.echo('Error: Node.js is not installed.');
     shell.exit(1);
@@ -40,10 +37,10 @@ function installWebosCli() {
     shell.echo('Error: WebOS CLI installation failed');
     shell.exit(1);
   }
-  shell.echo('WebOS CLI installed successfully! Run ares -V to confirm installation.');
+  shell.echo('WebOS CLI installed successfully');
 }
 
-function createWebosProject(projectName) {
+function createWebosProject(projectName: string): void {
   if (!projectName) {
     shell.echo('Error: Project name is required');
     shell.exit(1);
@@ -54,7 +51,7 @@ function createWebosProject(projectName) {
   }
 }
 
-function initiateTvPairing(deviceName, ip) {
+function initiateTvPairing(deviceName: string, ip: string): void {
   if (!deviceName || !ip) {
     shell.echo('Error: Device name and IP are required');
     shell.exit(1);
@@ -65,7 +62,7 @@ function initiateTvPairing(deviceName, ip) {
   }
 }
 
-function buildWebosIpk(projectDir) {
+function buildWebosIpk(projectDir: string): void {
   if (!projectDir) {
     shell.echo('Error: Project directory is required');
     shell.exit(1);
@@ -81,7 +78,7 @@ function buildWebosIpk(projectDir) {
   shell.echo('WebOS IPK build succeeded');
 }
 
-module.exports = {
+export {
   installWebosCli,
   createWebosProject,
   initiateTvPairing,

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-const { installWebosCli, createWebosProject, initiateTvPairing, buildWebosIpk } = require('../index');
+import { installWebosCli, createWebosProject, initiateTvPairing, buildWebosIpk } from '../index';
+
 const args = process.argv.slice(2);
 
 switch (args[0]) {
