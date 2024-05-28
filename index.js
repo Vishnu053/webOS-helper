@@ -81,9 +81,41 @@ function buildWebosIpk(projectDir) {
   shell.echo('WebOS IPK build succeeded');
 }
 
+function debugIpkOnEmulator(ipkPath) {
+  if (!ipkPath) {
+    shell.echo('Error: IPK file path is required');
+    shell.exit(1);
+  }
+  if (shell.exec(`ares-install --device emulator ${ipkPath}`).code !== 0) {
+    shell.echo('Error: Failed to install IPK on emulator');
+    shell.exit(1);
+  }
+  if (shell.exec('ares-launch --device emulator com.yourdomain.appid').code !== 0) {
+    shell.echo('Error: Failed to launch app on emulator');
+    shell.exit(1);
+  }
+}
+
+function debugIpkOnTv(ipkPath, tvId) {
+  if (!ipkPath || !tvId) {
+    shell.echo('Error: IPK file path and TV ID are required');
+    shell.exit(1);
+  }
+  if (shell.exec(`ares-install --device ${tvId} ${ipkPath}`).code !== 0) {
+    shell.echo('Error: Failed to install IPK on TV');
+    shell.exit(1);
+  }
+  if (shell.exec(`ares-launch --device ${tvId} com.yourdomain.appid`).code !== 0) {
+    shell.echo('Error: Failed to launch app on TV');
+    shell.exit(1);
+  }
+}
+
 module.exports = {
   installWebosCli,
   createWebosProject,
   initiateTvPairing,
-  buildWebosIpk
+  buildWebosIpk,
+  debugIpkOnEmulator,
+  debugIpkOnTv
 };

@@ -1,10 +1,10 @@
 {
   "name": "webos-helper",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A small utility that can help you to easily setup, create and manage, and do more on WebOS TV platform",
   "main": "index.js",
   "scripts": {
-    "start": "node bin/webos-helper.js",
+    "start": "node ./bin/webos-helper.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
